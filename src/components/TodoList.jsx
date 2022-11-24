@@ -1,64 +1,33 @@
-import React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-import styles from './TodoList.scss'
+import {db} from '../firebase'
+import {collection, query, onSnapshot} from "firebase/firestore";
 
-import {TodoItem} from "../TodoItem/TodoItem";
-import {AddTodo} from "../AddTodo/AddTodo";
+import {TodoItem} from "./TodoItem";
+import {AddTodo} from "./AddTodo";
 
 export const TodoList = () => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: 'Первая задача',
-      description: 'добить все приложение',
-      date: '25.11.2022',
-      attachedFiles: 'CV',
-      done: false,
-      overdue: false
-    },
-    {
-      id: 2,
-      title: 'Первая задача',
-      description: 'добить все приложение',
-      date: '25.11.2022',
-      attachedFiles: 'CV',
-      done: false,
-      overdue: false
-    },
-    {
-      id: 3,
-      title: 'Первая задача',
-      description: 'добить все приложение',
-      date: '25.11.2022',
-      attachedFiles: 'CV',
-      done: false,
-      overdue: false
-    },
-    {
-      id: 4,
-      title: 'Первая задача',
-      description: 'добить все приложение',
-      date: '25.11.2022',
-      attachedFiles: 'CV',
-      done: false,
-      overdue: false
-    },
-    {
-      id: 5,
-      title: 'Первая задача',
-      description: 'добить все приложение',
-      date: '25.11.2022',
-      attachedFiles: 'CV',
-      done: false,
-      overdue: false
-    }
-  ])
+
+  const [todos, setTodos] = useState([])
+  useEffect(() => {
+    const q = query(collection(db, 'todos'))
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let todosList = []
+      querySnapshot.forEach((doc) => {
+        todosList.push({...doc.data(), id: doc.id})
+      })
+      setTodos(todosList)
+    })
+    return () => unsub()
+  }, [])
 
   return (
-    <div className={styles.container}>
+    <div>
       <AddTodo todos={todos} setTodos={setTodos}/>
-      <TodoItem todos={todos} setTodos={setTodos}/>
+      {todos.map((item, index) => (
+          <TodoItem key={index} todos={todos} setTodos={setTodos}/>
+        ))
+      }
     </div>
   )
 }

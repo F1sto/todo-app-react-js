@@ -1,13 +1,123 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: system-ui;
+ }
+
+ body {
+   background-color: #e0eeff;
+ }
+
+ .container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+.form {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 25px;
+  box-shadow: 2px 0 10px #c4c4c4;
+  display: flex;
+  flex-direction: column;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ .form input {
+   width: 280px;
+   height: 50px;
+   padding: 10px;
+   outline: none;
+   border-radius: 5px;
+   margin: 15px 0;
+   font-size: 16px;
+ }
+
+ .inputFile::file-selector-button {
+ }
+
+ .form button {
+   padding: 15px;
+   border: none;
+   border-radius: 5px;
+   background-color: #0c6bc5;
+   color: #fff;
+   font-size: 16px;
+   cursor: pointer;
+ }
+
+ .form button:hover {
+   background-color: #3587ff;
+ }
+
+ .form button:active {
+   background-color: #0054b7;
+ }
+
+.todo {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 25px;
+  box-shadow: 2px 0px 10px #c4c4c4
 }
+
+.todo p {
+  opacity: 0.8;
+  margin-top: 15px;
+}
+
+.todo div{
+  margin-top: 15px;
+}
+
+.todo button {
+  border: none;
+  padding: 5px 10px;
+  margin: 15px 10px 0 0;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+ .green {
+   background-color: #0fb04d;
+ }
+
+ .red {
+   background-color: #b00f0f;
+ }
+
+ .orange {
+   background-color: #b04d0f;
+ }
+
+ .servicesInfo {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .todo span {
+   font-size: 16px;
+   font-style: italic;
+   position: relative;
+ }
+
+ .calendar {
+   margin-top: 15px;
+   margin-right: 5px;
+   font-size: 24px;
+   color: #5b4838;
+ }
+
+ .file {
+   margin-top: 15px;
+   margin-right: 5px;
+   font-size: 24px;
+   color: #5b4838;
+ }
+
+

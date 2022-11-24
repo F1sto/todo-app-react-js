@@ -1,5 +1,7 @@
-import styles from './TodoItem.module.scss'
 import {useState} from "react";
+
+import {db} from '../firebase'
+import {doc, updateDoc, deleteDoc} from 'firebase/firestore'
 
 import {AiOutlineEdit, AiOutlineDelete, AiOutlineCheck, AiOutlineCalendar, AiOutlineFile} from 'react-icons/ai'
 
@@ -11,19 +13,14 @@ export const TodoItem = ({todos, setTodos}) => {
   const [dateValue, setDateValue] = useState('')
   const [fileValue, setFileValue] = useState('')
 
-  const removeTodo = (id) => {
-    let newTodos = [...todos].filter(item => item.id !== id)
-    setTodos(newTodos)
+  const removeTodo = async (id) => {
+    await deleteDoc(doc(db, "todos", id))
   }
 
-  const closeTodo = (id) => {
-    let newTodos = [...todos].map(item => {
-      if(item.id === id) {
-        item.overdue = !item.overdue
-      }
-      return item
+  const completeTodo = async (todo) => {
+    await updateDoc(doc(db, 'todos', todo.id), {
+      completed: !todo.completed
     })
-    setTodos(newTodos)
   }
 
   const editTodo = ({id, title, description, date, file}) => {
@@ -33,19 +30,16 @@ export const TodoItem = ({todos, setTodos}) => {
     setDescriptionValue(description)
     setDateValue(date)
     setFileValue(file)
-}
+  }
 
-  const saveEditTodo = (id) => {
-    let newTodos = [...todos].map(item => {
-      if(item.id === id) {
-        item.title = titleValue
-        item.description = descriptionValue
-        item.date = dateValue
-        item.file = fileValue
-      }
-      return item
+  const saveUpdatedTodo = async (id ,title, description, date, file) => {
+
+    await updateDoc(doc(db, "todos", id.id),{
+      titleValue: title,
+      descriptionValue: description,
+      dateValue: date,
+      fileValue: file
     })
-    setTodos(newTodos)
     setEdit(false)
   }
 
@@ -53,27 +47,27 @@ return (
     <>
       {
         todos.map((item, index) => (
-          <div key={index} className={styles.todo}>
+          <div key={index} >
             {edit === item.id ?
               <>
                 <input onChange={(e) => setTitleValue(e.target.value)} value={titleValue} type="text"/>
                 <input onChange={(e) => setDescriptionValue(e.target.value)} value={descriptionValue} type="text"/>
                 <input onChange={(e) => setDateValue(e.target.value)} value={dateValue} type="date"/>
                 <input onChange={(e) => setFileValue(e.target.value)} value={fileValue} type="file"/>
-                <button onClick={() => saveEditTodo(item.id)}>Сохранить</button>
+                <button onClick={() => saveUpdatedTodo(item.id)}>Сохранить</button>
               </>
             :
-              <>
-                <h3>{item.title}</h3>
-                <p>Описание: {item.description}</p>
-                <div className={styles.serviceInformation}>
-                  <p> <AiOutlineCalendar/> {item.date}</p>
-                  <p> <AiOutlineFile/> {item.attachedFiles} </p>
+              <div className="todo">
+                <h3>{item.titleValue}</h3>
+                <p>{item.descriptionValue}</p>
+                <div className="servicesInfo">
+                  <span> <AiOutlineCalendar className="calendar"/> {item.dateValue}</span>
+                  <span> <AiOutlineFile className="file"/> {item.fileValue}</span>
                 </div>
-                <button onClick={() => closeTodo(item.id)}><AiOutlineCheck style={styles.btnDone}/></button>
-                <button onClick={() => removeTodo(item.id)}><AiOutlineDelete/></button>
-                <button onClick={() => editTodo({...item})}><AiOutlineEdit/></button>
-              </>}
+                <button className="green" onClick={() => completeTodo(item.id)}><AiOutlineCheck/></button>
+                <button className="red" onClick={() => removeTodo(item.id)}><AiOutlineDelete/></button>
+                <button className="orange" onClick={() => editTodo({...item})}><AiOutlineEdit/></button>
+              </div>}
           </div>
         ))
       }

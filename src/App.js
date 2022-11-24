@@ -1,12 +1,8 @@
-import { Header } from "../components/Header/Header";
-import { TodoList } from "../components/TodoList/TodoList";
-
-import styles  from "./App.module.scss"
+import { TodoList } from "./components/TodoList";
 
 function App() {
   return (
-    <div className={ styles.wrapper }>
-      <Header />
+    <div className="container">
       <TodoList />
     </div>
   );
