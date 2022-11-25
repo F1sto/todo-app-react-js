@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState} from "react"; //useEffect not used
 
 import {db} from '../firebase'
 import {doc, updateDoc, deleteDoc} from 'firebase/firestore'
@@ -14,9 +14,9 @@ export const TodoItem = ({todos}) => {
   const [fileValue, setFileValue] = useState('')
 
   const [edit, setEdit] = useState(null)
-  const [isOverdue, setIsOverdue] = useState(dayjs(new Date()).unix())
+  const [isOverdue, setIsOverdue] = useState(dayjs(new Date()).unix()) //setIsOverdue not used
 
-  const completeTodo = async (todo, id) => {
+  const completeTodo = async (todo, id) => { // id useEffect. todo - не todo, а его id, посмотри, что ты передаешь в параметрах при вызове. Передай todo, а в 'updateDoc' передай todo.id
     await updateDoc(doc(db, "todos", todo), {
       completed: !todo.completed
     })
