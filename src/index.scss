@@ -46,7 +46,7 @@
    color: #0054b7;
  }
 
- .form button {
+ .form input[type=submit] {
    padding: 15px;
    border: none;
    border-radius: 5px;
@@ -57,11 +57,11 @@
    margin-bottom: 10px;
  }
 
- .form button:hover {
+ .form input[type=submit]:hover {
    background-color: #3587ff;
  }
 
- .form button:active {
+ .form input[type=submit]:active {
    background-color: #0054b7;
  }
 
@@ -151,6 +151,13 @@
    margin-right: 5px;
    font-size: 24px;
    color: #5b4838;
+ }
+
+ .danger {
+   margin-top: 15px;
+   margin-right: 5px;
+   font-size: 24px;
+   color: #ff0000;
  }
 
  .file {
