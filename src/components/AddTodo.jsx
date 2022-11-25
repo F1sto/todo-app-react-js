@@ -5,7 +5,7 @@ import {collection, addDoc} from 'firebase/firestore'
 
 import dayjs from "dayjs";
 
-export const AddTodo = ({todos, setTodos}) => {
+export const AddTodo = () => {
   const [titleValue, setTitleValue] = useState('')
   const [descriptionValue, setDescriptionValue] = useState('')
   const [dateValue, setDateValue] = useState('')
@@ -18,11 +18,11 @@ export const AddTodo = ({todos, setTodos}) => {
     setFileValue('')
   }
 
-  const saveTodo = async (e) => {
+  const saveUpdatingTodo = async (e) => {
     e.preventDefault()
 
     await addDoc(collection(db, "todos"), {
-      id: new Date(),
+      id: dayjs(new Date()).unix(),
       titleValue,
       descriptionValue,
       dateValue: dayjs(dateValue).format('DD.MM.YYYY'),
@@ -39,7 +39,7 @@ export const AddTodo = ({todos, setTodos}) => {
         <input onChange={(e) => setDescriptionValue(e.target.value)} value={descriptionValue} type="text" placeholder="Описание"/>
         <input onChange={(e) => setDateValue(e.target.value)} value={dateValue} type="date" />
         <input onChange={(e) => setFileValue(e.target.value)} value={fileValue} type="file" placeholder="" className="inputFile"/>
-        <button onClick={saveTodo}>Добавить Задачу</button>
+        <button disabled={titleValue.length  && descriptionValue.length ? '' : 'disabled' } onClick={saveUpdatingTodo}>Добавить Задачу</button>
     </form>
   )
 }

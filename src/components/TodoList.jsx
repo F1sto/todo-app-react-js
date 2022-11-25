@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 import {db} from '../firebase'
-import {collection, query, onSnapshot} from "firebase/firestore";
+import {collection, query, onSnapshot, updateDoc, doc, deleteDoc} from "firebase/firestore";
 
 import {TodoItem} from "./TodoItem";
 import {AddTodo} from "./AddTodo";
@@ -24,8 +24,11 @@ export const TodoList = () => {
   return (
     <div>
       <AddTodo todos={todos} setTodos={setTodos}/>
-      {todos.map((item, index) => (
-          <TodoItem key={index} todos={todos} setTodos={setTodos}/>
+      {todos.map((item) => (
+          <TodoItem
+            key={item.id}
+            todos={todos}
+            setTodos={setTodos}/>
         ))
       }
     </div>

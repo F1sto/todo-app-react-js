@@ -5,10 +5,6 @@
    font-family: system-ui;
  }
 
- body {
-   background-color: #e0eeff;
- }
-
  .container {
    display: flex;
    flex-direction: column;
@@ -20,22 +16,34 @@
   padding: 10px 20px;
   border-radius: 10px;
   margin-top: 25px;
-  box-shadow: 2px 0 10px #c4c4c4;
+  box-shadow: 0 4px 16px #ccc;
   display: flex;
   flex-direction: column;
 }
 
  .form input {
    width: 280px;
-   height: 50px;
-   padding: 10px;
+   padding: 0 0 10px 0;
    outline: none;
-   border-radius: 5px;
+   border: none;
+   border-bottom: 1px solid #d0d0d0;
    margin: 15px 0;
    font-size: 16px;
+   background-color: transparent;
+   transition: 0.3s;
+ }
+
+ .form input:focus {
+   border-bottom: 1px solid #2e98ff;
  }
 
  .inputFile::file-selector-button {
+   padding: 5px 10px;
+   border: none;
+   background-color: #fff;
+   font-weight: bold;
+   font-style: italic;
+   color: #0054b7;
  }
 
  .form button {
@@ -46,6 +54,7 @@
    color: #fff;
    font-size: 16px;
    cursor: pointer;
+   margin-bottom: 10px;
  }
 
  .form button:hover {
@@ -57,6 +66,7 @@
  }
 
 .todo {
+  width: 320px;
   background-color: white;
   padding: 30px;
   border-radius: 10px;
@@ -73,25 +83,55 @@
   margin-top: 15px;
 }
 
-.todo button {
-  border: none;
-  padding: 5px 10px;
-  margin: 15px 10px 0 0;
-  font-size: 20px;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
+ .todoCompleted {
+   text-decoration: line-through;
+ }
+
+ .btn {
+   border: none;
+   padding: 5px 10px;
+   margin: 15px 10px 0 0;
+   font-size: 20px;
+   border-radius: 5px;
+   cursor: pointer;
+   color: #fff;
+ }
+
+.simpleBtn {
+
+  background-color: #0c6bc5;
 }
 
  .green {
+   border: none;
+   padding: 5px 10px;
+   margin: 15px 10px 0 0;
+   font-size: 20px;
+   color: #fff;
+   border-radius: 5px;
+   cursor: pointer;
    background-color: #0fb04d;
  }
 
  .red {
+   border: none;
+   padding: 5px 10px;
+   margin: 15px 10px 0 0;
+   font-size: 20px;
+   color: #fff;
+   border-radius: 5px;
+   cursor: pointer;
    background-color: #b00f0f;
  }
 
  .orange {
+   border: none;
+   padding: 5px 10px;
+   margin: 15px 10px 0 0;
+   font-size: 20px;
+   color: #fff;
+   border-radius: 5px;
+   cursor: pointer;
    background-color: #b04d0f;
  }
 
